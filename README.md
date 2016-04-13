@@ -4,6 +4,7 @@
 
 ## Notes
 binary snesm7 precalculation values for mode 7, the calculation is not yet implemented on the SNES code.
+
 In the demo you can make a 'zoom' with L and R, but for that the zoom is correct it is necessary to calculated during the game.
 
 
