@@ -151,7 +151,7 @@
 	sta $211B
 	
 	lda #\2&$FF
-	sta $211BC
+	sta $211C
 	lda #\2/$100
 	sta $211C
 	
