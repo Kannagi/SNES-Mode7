@@ -1,0 +1,5 @@
+
+compilation
+bash snes.sh
+
+
