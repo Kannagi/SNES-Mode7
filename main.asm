@@ -12,7 +12,7 @@
 Main:
 	sei
 	clc
-	    xce
+	xce
 	
 	rep #$10	;16 bit xy
 	sep #$20	; 8 bit a
@@ -22,7 +22,7 @@ Main:
 	SNES_INIT
 	Clear_RAM
 	
-	    ;INITIAL SETTINGS
+	;INITIAL SETTINGS
 	SNES_INIDISP $8F ; FORCED BLANK , brigtness 15
 	
 	;object
