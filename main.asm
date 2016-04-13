@@ -166,17 +166,17 @@ Main:
 		lda MEM_STDCTRL + _L	
 		cmp #2
 		bne +
-		rep #$20
-		inc fakezoom
-		sep #$20
+			rep #$20
+			inc fakezoom
+			sep #$20
 		+:
 		
 		lda MEM_STDCTRL + _R	
 		cmp #2
 		bne +
-		rep #$20
-		dec fakezoom
-		sep #$20
+			rep #$20
+			dec fakezoom
+			sep #$20
 		+:
 		
 		
@@ -184,32 +184,32 @@ Main:
 		lda MEM_STDCTRL+_LEFT
 		cmp #2
 		bne +
-		dec s_mode7+_m7an
+			dec s_mode7+_m7an
 		+:
 		
 		lda MEM_STDCTRL+_RIGHT
 		cmp #2
 		bne +
-		inc s_mode7+_m7an
+			inc s_mode7+_m7an
 		+:
 		
 		lda MEM_STDCTRL+_UP
 		cmp #2
 		bne +
-		ldx #0
-		stx MEM_TEMPFUNC
-		
-		jsl Move_Mode7
+			ldx #0
+			stx MEM_TEMPFUNC
+			
+			jsl Move_Mode7
 		
 		+:
 		
 		lda MEM_STDCTRL+_DOWN
 		cmp #2
 		bne +
-		ldx #1
-		stx MEM_TEMPFUNC
-		
-		jsl Move_Mode7
+			ldx #1
+			stx MEM_TEMPFUNC
+			
+			jsl Move_Mode7
 		+:
 		
 		wai
