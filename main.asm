@@ -12,8 +12,8 @@
 Main:
 	sei
 	clc
-    xce
-
+	    xce
+	
 	rep #$10	;16 bit xy
 	sep #$20	; 8 bit a
 	
@@ -22,7 +22,7 @@ Main:
 	SNES_INIT
 	Clear_RAM
 	
-    ;INITIAL SETTINGS
+	    ;INITIAL SETTINGS
 	SNES_INIDISP $8F ; FORCED BLANK , brigtness 15
 	
 	;object
@@ -39,95 +39,95 @@ Main:
 	
 	;general init
 	SNES_SETINI $00 ;$40 ext BG
-    SNES_TM $11 ; obj & bg 1 enable
-    
-    
-    ;FORCED BLANK
-       
-
+	SNES_TM $11 ; obj & bg 1 enable
+	
+	
+	;FORCED BLANK
+	
+	
 	;Load bg 1
-    SNES_VMAINC $00
+	SNES_VMAINC $00
 	SNES_VMADD $0000
-    
-    SNES_DMA0 $00
+	
+	SNES_DMA0 $00
 	SNES_DMA0_BADD $18
 	SNES_DMA0_ADD Map $4000
 	
-    SNES_MDMAEN $01
-
-    SNES_VMAINC $80
+	SNES_MDMAEN $01
+	
+	SNES_VMAINC $80
 	SNES_VMADD $0000
-    
-    SNES_DMA0 $00
+	
+	SNES_DMA0 $00
 	SNES_DMA0_BADD $19
-    SNES_DMA0_ADD Tiles $4000
-    
-    SNES_MDMAEN $01  
-    
-    
-    ;Load Object
-    
-    
-    SNES_DMAX $01
+	SNES_DMA0_ADD Tiles $4000
+	
+	SNES_MDMAEN $01  
+	
+	
+	;Load Object
+	
+	
+	SNES_DMAX $01
 	SNES_DMAX_BADD $18
 	
 	SNES_VMADD $6200
 	SNES_DMA0_ADD Font3 $400	
 	
-    SNES_MDMAEN $01
-    
-
-    
-    ; Load Palette
-    SNES_CGADD $00
-       
-    SNES_DMA0 $00
+	SNES_MDMAEN $01
+	
+	
+	
+	; Load Palette
+	SNES_CGADD $00
+	
+	SNES_DMA0 $00
 	SNES_DMA0_BADD $22
-    SNES_DMA0_ADD pallette_mode7 $0100
-    SNES_MDMAEN $01
-    
-    ;font 3
-    SNES_CGADD $80
-       
-    SNES_DMA0 $00
+	SNES_DMA0_ADD pallette_mode7 $0100
+	SNES_MDMAEN $01
+	
+	;font 3
+	SNES_CGADD $80
+	
+	SNES_DMA0 $00
 	SNES_DMA0_BADD $22
-    SNES_DMA0_ADD pallette_fontdgt $0020
-    SNES_MDMAEN $01
-    
-    ;palette sky
-    SNES_CGADD $70
-    SNES_DMA0_ADD pallette_sky $0020
-    SNES_MDMAEN $01
-    
-    
-    
+	SNES_DMA0_ADD pallette_fontdgt $0020
+	SNES_MDMAEN $01
+	
+	;palette sky
+	SNES_CGADD $70
+	SNES_DMA0_ADD pallette_sky $0020
+	SNES_MDMAEN $01
+	
+	
+	
 	
 	;Load bg 2
 	SNES_DMAX $01
 	SNES_DMAX_BADD $18
 	
 	SNES_VMADD $4000
-    
+	
 	SNES_DMA0_ADD sky $1800
 	
 	SNES_MDMAEN $01
 	
-
+	
 	;Load BG2 tile
 	SNES_VMADD $5800
 	
 	SNES_DMA0_ADD skytile $200
 	
 	SNES_MDMAEN $01
-    
-      
-
-    
-    SNES_M7SEL $00
-    SNES_M7 $100,$00,$00,$100,$80,$80
-
+	
+	
+	
+	
+	SNES_M7SEL $00
+	SNES_M7 $100,$00,$00,$100,$80,$80
+	
 	;--------------------------
-
+	
 	jsl Init_HDMA_M7
 	
 	;------------------------------
@@ -139,7 +139,7 @@ Main:
 	
 	ldx #$100
 	stx s_mode7+_m7y
-
+	
 	;------------------------------
 	
 	SNES_BGMODE $31
@@ -159,7 +159,6 @@ Main:
 	sta MEM_VBLANK+2
 	
 	Gameloop:	
-	
 		jsl Clear_OAM
 		jsl Debug_M7
 		
@@ -167,83 +166,69 @@ Main:
 		lda MEM_STDCTRL + _L	
 		cmp #2
 		bne +
-			rep #$20
-			inc fakezoom
-			sep #$20
+		rep #$20
+		inc fakezoom
+		sep #$20
 		+:
 		
 		lda MEM_STDCTRL + _R	
 		cmp #2
 		bne +
-			rep #$20
-			dec fakezoom
-			sep #$20
+		rep #$20
+		dec fakezoom
+		sep #$20
 		+:
-
+		
 		
 		
 		lda MEM_STDCTRL+_LEFT
 		cmp #2
 		bne +
-			dec s_mode7+_m7an
+		dec s_mode7+_m7an
 		+:
 		
 		lda MEM_STDCTRL+_RIGHT
 		cmp #2
 		bne +
-			inc s_mode7+_m7an
+		inc s_mode7+_m7an
 		+:
 		
 		lda MEM_STDCTRL+_UP
 		cmp #2
 		bne +
-			ldx #0
-			stx MEM_TEMPFUNC
-			
-			jsl Move_Mode7
-			
+		ldx #0
+		stx MEM_TEMPFUNC
+		
+		jsl Move_Mode7
+		
 		+:
 		
 		lda MEM_STDCTRL+_DOWN
 		cmp #2
 		bne +
-			ldx #1
-			stx MEM_TEMPFUNC
-			
-			jsl Move_Mode7
+		ldx #1
+		stx MEM_TEMPFUNC
+		
+		jsl Move_Mode7
 		+:
 		
 		wai
-		
-
-    jmp Gameloop
-	
 	
 
+	jmp Gameloop
 	
-		
-	
+
 	.include "oam.asm"
-
-
 	.include "joypad.asm"
-		
-
-	
 	.include "VBlank.asm"
-	
-	
-	
 	
 .bank 1 slot 0
 .org 0
-
 	.include "mode7.asm"
 
 
 .bank 2 slot 0
 .org 0
-	
 	
 sincos:
 	.include "DATA/sincos.asm"
@@ -251,8 +236,6 @@ sincos:
 sincos2:
 	.include "DATA/dsincos.asm"
 	
-		
-
 sky:
 	.include "DATA/sky.asm"
 	
