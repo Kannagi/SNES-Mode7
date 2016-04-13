@@ -11,7 +11,7 @@ In the demo you can make a 'zoom' with L and R, but for that the zoom is correct
 ### Requirements
 Building the demo from the source code requires:
 - wla-dx
-- GNU Make
+- GNU gcc
 
 ### How to Build
 - bash snes.sh
