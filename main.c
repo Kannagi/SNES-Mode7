@@ -32,7 +32,7 @@ int main(int argc, char** argv)
         ozoom = zoom;
         fputc(ozoom&0xFF,file);
         fputc((ozoom>>8)&0xFF,file);
-        printf("$%x %f \n",ozoom,pr);
+        //printf("$%x %f \n",ozoom,pr);
 
         zoom -= (sub  *pr);
     }
